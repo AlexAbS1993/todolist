@@ -1,0 +1,8 @@
+Добавление нового Validator
+    1) Добавить в объект ToDoValidatorOperations новое название операции, если такое необходимо (./src/data/operations.ts)
+    2) Добавить новый объект или же поле в существующий объект ValidatorDiscriptions новое название описания и 
+    функцию, возвращающую описание, если такое необходимо (./src/data/ValidatorDiscriptions.ts)
+    3) Создать новую функцию валидатора в (./src/lib/validator/validators.ts), принимающую некую data в качестве аргумента (с обозначением типа) и возвращающую объект 
+    типа ValidateResultType с полями status, discription и validType.
+    4) Для задания discription и validType использовать константы, созданные в папке (./src/data/operations.ts и ./src/data/ValidatorDiscriptions.ts)
+    5) В файле index.ts (./src/lib/validator) создать новый валидатор со встроенной в него функцией обработки входящих данных

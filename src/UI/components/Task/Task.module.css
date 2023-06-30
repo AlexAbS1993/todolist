@@ -1,0 +1,29 @@
+.task_container {
+    width: 100%;
+    height: clamp(40px, 100%, 80px);
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+}
+
+/* .task_discription_container{ 
+
+}
+
+.task_title_container {
+
+} */
+
+.task_container_new {
+    background-color: aquamarine;
+}
+
+.task_container_inprogress {
+    background-color: rgb(245, 229, 86);
+}
+
+.task_container_complete {
+    background-color: rgb(6, 138, 46);
+}
+.task_container_changing {
+    background-color: rgb(59, 8, 29);
+}
