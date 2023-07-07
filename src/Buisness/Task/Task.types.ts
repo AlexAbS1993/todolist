@@ -19,6 +19,7 @@ export interface ITaskList {
     delete(id: number): void
     getById: (id: number) => ITask | null
     hasById: (id: number) => Boolean
+    define(data: ITask[]): void
 }
 
 export interface ITaskState {

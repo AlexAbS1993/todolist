@@ -1,4 +1,4 @@
-import { TaskUiStateNew } from "./Task.ui.state";
+import { TaskUiStateCompleted, TaskUiStateInProgress, TaskUiStateNew } from "./Task.ui.state";
 import { ITaskUI, ITaskUIList, ITaskUIState, TaskUiDTO } from "./Task.ui.types";
 
 export class TaskUI implements ITaskUI {
@@ -23,7 +23,16 @@ export class TaskUI implements ITaskUI {
         this.timeInProgress = data.timeInProgress || null
     }
     initialize() {
+        if(this.dateEnd){
+            this.setState(new TaskUiStateCompleted())
+            return this
+        }
+        if (this.timeInProgress){
+            this.setState(new TaskUiStateInProgress())
+            return this
+        }
         this.setState(new TaskUiStateNew())
+        return this
     }
     update(data: TaskUiDTO) {
         this.name = data.name

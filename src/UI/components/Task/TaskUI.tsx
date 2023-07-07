@@ -2,19 +2,18 @@ import { FC, useEffect, useState } from "react";
 import classes from "./Task.module.css";
 import { ITaskUI, ITaskUIList } from "./Task.ui.types";
 import { GetTaskListFromModelCommand } from "../../../lib/commands/getTaskListFromModel";
-import { LocalStorageAPI } from "../../../API/localStorage.api";
-import { TaskDTO } from "../../../Buisness/Task/Task.types";
 import { TaskListUi } from "./Task.ui.entity";
 
 export type TaskPropsType = {
   name: string;
   discription: string;
   children: React.ReactNode;
+  classProps: string[]
 };
 
-export const Task: FC<TaskPropsType> = ({ discription, name, children }) => {
+export const Task: FC<TaskPropsType> = ({ discription, name, children, classProps }) => {
   return (
-    <div className={[classes.task_container].join(" ")}>
+    <div className={[classes.task_container, ...classProps].join(" ")}>
       <div className={classes.task_title_container}>
         <h1>{name}</h1>
       </div>
@@ -29,9 +28,7 @@ export const Task: FC<TaskPropsType> = ({ discription, name, children }) => {
 export const TaskListContainer: FC = () => {
   const [taskList, setTaskList] = useState<ITaskUIList>(new TaskListUi([]));
   useEffect(() => {
-    let initialState = new GetTaskListFromModelCommand({
-      API: new LocalStorageAPI<string, TaskDTO[]>(),
-    }).execute();
+    const initialState = new GetTaskListFromModelCommand().execute();
     setTaskList(initialState);
   }, []);
   return (
@@ -39,6 +36,7 @@ export const TaskListContainer: FC = () => {
       {taskList.tasks.map((task: ITaskUI) => {
         return (
           <Task
+            classProps={task.classStyle}
             key={task.id}
             discription={task.discription}
             name={task.name}

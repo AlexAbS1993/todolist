@@ -6,6 +6,7 @@ export interface ITaskUI {
     dateStart: string | null
     dateEnd: string | null
     timeInProgress: string | null
+    classStyle: string[]
     changeName(name: string): void
     changeDiscriptions(disc: string): void
     setStyle(style: string): void

@@ -1,25 +1,20 @@
-import { APII } from "../../API/API.types";
-import { localStorageConstants } from "../../data/localStorage";
-import { Task } from "./Task.entity";
-import { ITask, ITaskList, TaskDTO } from "./Task.types";
+import { ITask, ITaskList } from "./Task.types";
 
 export class TaskList implements ITaskList {
     tasks: (ITask)[]
     constructor() {
         this.tasks = []
     }
-    getTaskList(API: APII<string, TaskDTO[]>) {
-        let result: TaskDTO[] = API.get(localStorageConstants.key)
-        for (let i in result) {
-            this.add(new Task(result[i]))
-        }
+    define(data: ITask[]){
+        this.tasks = data
+        return this
     }
     add(task: ITask) {
         this.tasks.push(task)
         return this
     }
     delete(id: number) {
-        let result = this.tasks.filter((task) => task.getId() !== id)
+        const result = this.tasks.filter((task) => task.getId() !== id)
         this.tasks = result
         return this
     }
