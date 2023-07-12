@@ -6,6 +6,6 @@ import { Command } from "./Comand.types";
 export class AddTaskToListCommand implements Command<ITaskUI, void>{
     execute(data: ITaskUI): void {
        let mappedTask = new MapperFromUiToTaskEntity().doMap(data)
-       TaskController.Instance.addTaskToList(mappedTask)
+       TaskController.getInstance().addTaskToList(mappedTask)
     } 
 }

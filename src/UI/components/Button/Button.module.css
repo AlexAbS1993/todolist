@@ -1,0 +1,28 @@
+.button_container {
+    width: 100%;
+    height: 100%;
+}
+
+.button {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+}
+
+.deleteButton {
+    background-color: var(--layout-color) ;
+    border: red 1px solid;
+    border-radius: 10px;
+}
+
+.deleteButton:hover {
+    background-color: red;
+    transition: 0.3s ease all;
+}
+
+.deleteButton__unactive {
+    background-color: rgba(181, 153, 153, 0.424);
+}

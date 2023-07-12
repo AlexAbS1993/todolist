@@ -1,3 +1,3 @@
-export interface Command<T, K> {
-    execute(data: T): K
+export interface Command<DataType, ResonseType> {
+    execute(data: DataType): ResonseType|Promise<ResonseType>
 }

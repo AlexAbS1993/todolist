@@ -1,3 +1,6 @@
+import { UIUnstanceName } from "../../../Cathalog/cathalog.instances.types";
+import { EventsName } from "../../../data/events";
+import { IEventable } from "../../../lib/events/Event.interface";
 import { TaskUiStateCompleted, TaskUiStateInProgress, TaskUiStateNew } from "./Task.ui.state";
 import { ITaskUI, ITaskUIList, ITaskUIState, TaskUiDTO } from "./Task.ui.types";
 
@@ -34,14 +37,6 @@ export class TaskUI implements ITaskUI {
         this.setState(new TaskUiStateNew())
         return this
     }
-    update(data: TaskUiDTO) {
-        this.name = data.name
-        this.id = data.id
-        this.discription = data.discription
-        this.dateStart = data.dateStart || null
-        this.dateEnd = data.dateEnd || null
-        this.timeInProgress = data.timeInProgress || null
-    }
     changeName(name: string): void {
         this.name = name
         return
@@ -64,14 +59,39 @@ export class TaskUI implements ITaskUI {
     }
 }
 
-export class TaskListUi implements ITaskUIList {
+export class TaskListUi implements ITaskUIList, IEventable {
     tasks: ITaskUI[]
+    instanceName: string;
     constructor(tasks: ITaskUI[]) {
+        this.instanceName = UIUnstanceName.TaskListUI
         this.tasks = tasks
     }
     define(tasks: ITaskUI[]): ITaskUI[] {
         this.tasks = tasks
         return this.tasks
     }
-
+    add(task: ITaskUI){
+        this.tasks.push(task)
+        return this
+    }
+    update<dataType>(data: dataType, name: EventsName) {
+        switch(name){
+            case EventsName.TaskAdded:{
+                this.add(new TaskUI(data as TaskUiDTO).initialize())
+                return
+            }
+            case EventsName.TaskDeleted: {
+                let filteredTasks = this.tasks.filter((task) => {
+                    if (task.id !== data as number){
+                        return true
+                    }
+                    return false
+                })
+                this.define(filteredTasks)
+                return
+            }
+            default: 
+            return
+        }
+    }
 }

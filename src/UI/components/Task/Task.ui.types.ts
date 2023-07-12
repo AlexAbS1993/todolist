@@ -19,6 +19,7 @@ export interface ITaskUI {
 export interface ITaskUIList {
     tasks: ITaskUI[]
     define(tasks: ITaskUI[]): ITaskUI[]
+    add(task: ITaskUI): this
 }
 
 export interface ITaskUIState {

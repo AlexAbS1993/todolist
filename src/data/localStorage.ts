@@ -1,3 +1,4 @@
 export const localStorageConstants = {
-    key: "tasklist"
+    key: "tasklist",
+    lastUpdate: "lastUpdate"
 }

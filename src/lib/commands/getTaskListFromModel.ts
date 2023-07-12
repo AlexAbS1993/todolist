@@ -5,8 +5,8 @@ import { MapperFromTaskToTaskUi } from "../mappers/FromTaskEntityToTaskUi.mapper
 import { Command } from "./Comand.types";
 
 export class GetTaskListFromModelCommand implements Command<void, ITaskUIList>{
-    execute(): ITaskUIList {
-        let result =  TaskController.Instance.getTasks()
+    async execute(): Promise<ITaskUIList> {
+        let result =  await TaskController.getInstance().getTasks()
         const mappedResult = result.tasks.map((task) => {
             return new TaskUI(new MapperFromTaskToTaskUi().doMap(task)).initialize()
         })

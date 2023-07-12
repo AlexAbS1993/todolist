@@ -1,29 +1,92 @@
 .task_container {
     width: 100%;
-    height: clamp(40px, 100%, 80px);
+    height: clamp(40px, 5vmin, 80px);
     display: grid;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 20% 70% 10%;
+    border-radius: 5px;
+    border: 2px solid blueviolet;
+    margin-bottom: 3px;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
 }
-
-/* .task_discription_container{ 
-
-}
-
-.task_title_container {
-
-} */
 
 .task_container_new {
-    background-color: aquamarine;
+   animation: appearAquamarine 1s;
+   background-color: var(--primary-color);
+   transition: background-color 500ms ease;
+}
+@keyframes appearAquamarine{
+    0% {
+        opacity: 0;
+        background-color: rgb(59, 8, 29);;
+    }
+    100%{
+        background-color: var(--primary-color);
+        opacity: 1;
+    }
 }
 
 .task_container_inprogress {
-    background-color: rgb(245, 229, 86);
+    animation: fromNewToInProgress 2s forwards;
+}
+
+@keyframes fromNewToInProgress {
+    0%{
+        background-color: aquamarine;
+    }
+    100%{
+        background-color: rgb(245, 229, 86);
+    }
 }
 
 .task_container_complete {
-    background-color: rgb(6, 138, 46);
+    animation: fromInProgressToComplete 2s forwards;
+}
+@keyframes fromInProgressToComplete {
+    0%{
+        background-color: rgb(245, 229, 86);;
+    }
+    100%{
+        background-color: rgb(6, 138, 46);
+    }
 }
 .task_container_changing {
     background-color: rgb(59, 8, 29);
+}
+
+.task_deleting {
+    animation: task_deleting 1s ease-out forwards;
+    transform: translate(0%);
+    background-color: red;
+    transition: background-color 1000ms linear;
+    opacity: 1;
+}
+
+@keyframes task_deleting {
+    0%{
+        transform: translate(0%);
+        opacity: 1;
+    }
+    50%{
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-100%);
+        opacity: 0;
+    }
+}
+
+p {
+    color: var(--text-primary-color);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+    color: var(--text-primary-color);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.task_instruments_container {
+    height: 80%;
 }
